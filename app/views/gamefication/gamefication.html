@@ -1,0 +1,14 @@
+<h1>Gamefication</h1>
+<table class="table table-striped">
+    <tr>
+        <th>Nome</th>
+        <th>Email</th>
+        <th>Total</th>
+    </tr>
+    <tr dir-paginate="item in lista | itemsPerPage: pageSize" current-page="currentPage">
+        <td>{{item.nome}}</td>
+        <td>{{item.email}}</td>
+        <td>{{item.total}}</td>
+    </tr>
+</table>
+<dir-pagination-controls boundary-links="true" on-page-change="pageChangeHandler(newPageNumber)" template-url="bower_components/angular-utils-pagination/dirPagination.tpl.html"></dir-pagination-controls>

@@ -1,0 +1,41 @@
+<h1>Formulário do grupo</h1>
+<div class="panel panel-default">
+    <div class="panel-body">
+        <a type="submit" class="btn btn-primary" ng-href="#/listGrupo">
+            <i class="glyphicon glyphicon-chevron-left"></i> Voltar
+        </a>
+    </div>
+</div>
+<form name="formGrupo" class="form-horizontal">
+    <div class="form-group" ng-class="{'has-error' : isInvalidField('inputNome')}">
+        <label class="control-label col-md-2" for="inputNome">Nome</label>
+        <div class="col-md-6">
+            <input name="inputNome"
+                   type="text"
+                   class="form-control"
+                   id="inputNome"
+                   placeholder="Nome do grupo"
+                   ng-model="grupo.nome"
+                   required>
+        </div>
+        <span class="help-block col-md-4" ng-show="isInvalidField('inputNome')">Campo é obrigatório!</span>
+    </div>
+
+    <div class="form-group" ng-class="{'has-error' : isInvalidField('inputDescricao')}">
+        <label class="control-label col-md-2" for="inputDescricao">Descrição</label>
+        <div class="col-md-6">
+           <input name="inputDescricao"
+                   type="text"
+                   class="form-control"
+                   id="inputDescricao"
+                   placeholder="Descrição do grupo"
+                   ng-model="grupo.descricao"
+                   required>
+            </div>
+        </div>
+    </div>    
+    <hr>
+    <a type="submit" class="btn btn-default" ng-click="limpar()">Limpar</a>
+    <a type="submit" class="btn btn-primary" ng-click="salvar()" ng-show="!grupo.codigo" ng-disabled="!isInvalidForm()">Salvar</a>
+    <a type="submit" class="btn btn-primary" ng-click="editar()" ng-show="grupo.codigo" ng-disabled="!isInvalidForm()">Editar</a>
+</form>

@@ -1,0 +1,56 @@
+<h1>Formulário de dispositivo</h1>
+<div class="panel panel-default">
+    <div class="panel-body">
+        <a type="submit" class="btn btn-primary" ng-href="#/listDispositivo">
+            <i class="glyphicon glyphicon-chevron-left"></i> Voltar
+        </a>
+    </div>
+</div>
+<form name="formDispositivo" class="form-horizontal">
+
+    <div class="form-group" ng-class="{'has-error' : isInvalidField('inputLayer')}">
+        <label class="control-label col-md-2" for="inputLayer">Layers</label>
+        <div class="col-md-6">
+            <select name="inputLayer"
+                    id="inputLayer"
+                    class="form-control"
+                    ng-model="dispositivo.codigo_layer"
+                    ng-options="layer.codigo as layer.nome for layer in layers">
+            </select>
+        </div>
+    </div>  
+
+    <div class="form-group" ng-class="{'has-error' : isInvalidField('inputDescricao')}">
+        <label class="control-label col-md-2" for="inputDescricao">Descrição</label>
+        <div class="col-md-6">
+           <input name="inputDescricao"
+                   type="text"
+                   class="form-control"
+                   id="inputDescricao"
+                   placeholder="Descrição do dispositivo"
+                   ng-model="dispositivo.descricao"
+                   required>
+            </div>
+        </div>
+    </div>    
+
+
+    <div class="form-group" ng-class="{'has-error' : isInvalidField('inputEndereco')}">
+        <label class="control-label col-md-2" for="inputNome">Endereço</label>
+        <div class="col-md-6">
+            <input name="inputEndereco"
+                   type="text"
+                   class="form-control"
+                   id="inputEndereco"
+                   placeholder="Rua Felipe Schmidt, 1000 - Centro, Florianópolis - SC"
+                   ng-model="dispositivo.endereco"
+                   required>
+        </div>
+        <span class="help-block col-md-4" ng-show="isInvalidField('inputEndereco')">Campo é obrigatório!</span>
+    </div>
+
+    <hr>
+    <a type="submit" class="btn btn-default" ng-click="limpar()">Limpar</a>
+    <a type="submit" class="btn btn-primary" ng-click="salvar()" ng-show="!dispositivo.codigo" ng-disabled="!isInvalidForm()">Salvar</a>
+    <a type="submit" class="btn btn-primary" ng-click="editar()" ng-show="dispositivo.codigo" ng-disabled="!isInvalidForm()">Editar</a>
+</form>

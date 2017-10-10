@@ -1,0 +1,50 @@
+<h1>Listagem de municípios</h1>
+<div class="panel panel-default">
+    <div class="panel-body">
+        <a type="submit" class="btn btn-primary" ng-href="#/formMunicipio"
+            ng-show="$root.getPermissao() === 'ADMINISTRADOR'">
+            <i class="glyphicon glyphicon-plus"></i> Adicionar
+        </a>
+    </div>
+</div>
+<table class="table table-striped">
+    <tr>
+        <th>Nome</th>
+        <th>Região</th>
+        <th></th>
+    </tr>
+    <tr dir-paginate="municipio in municipios | itemsPerPage: pageSize" current-page="currentPage">
+        <td>{{municipio.nome}}</td>
+        <td>{{municipio.regiao}}</td>
+        <td class="col-md-2 text-right">
+            <a class="btn btn-danger" data-toggle="modal" data-target="#municipioModal"
+                ng-click="selecionarMunicipio(municipio)"
+                ng-show="$root.getPermissao() === 'ADMINISTRADOR'">
+                <i class="glyphicon glyphicon-trash"></i>
+            </a>
+            <a class="btn btn-default" ng-href="#/formMunicipio/{{municipio.codigo}}"
+                ng-show="$root.getPermissao() === 'ADMINISTRADOR'">
+                <i class="glyphicon glyphicon-edit"></i>
+            </a>
+        </td>
+    </tr>
+</table>
+<dir-pagination-controls boundary-links="true" on-page-change="pageChangeHandler(newPageNumber)" template-url="bower_components/angular-utils-pagination/dirPagination.tpl.html"></dir-pagination-controls>
+<!-- Modal -->
+<div class="modal fade" id="municipioModal" tabindex="-1" role="dialog" aria-labelledby="municipioModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="municipioModalLabel">Excluir município?</h4>
+            </div>
+            <div class="modal-body">
+                Deseja excluir o município [{{municipio.nome}}]?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="removerMunicipio()">Excluir</button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,48 @@
+<h1>Listagem de regiões metropolitanas</h1>
+<div class="panel panel-default">
+    <div class="panel-body">
+        <a type="submit" class="btn btn-primary" ng-href="#/formRegiao"
+            ng-show="$root.getPermissao() === 'ADMINISTRADOR'">
+            <i class="glyphicon glyphicon-plus"></i> Adicionar
+        </a>
+    </div>
+</div>
+<table class="table table-striped">
+    <tr>
+        <th>Nome</th>
+        <th></th>
+    </tr>
+    <tr dir-paginate="regiao in regioes | itemsPerPage: pageSize" current-page="currentPage">
+        <td>{{regiao.nome}}</td>
+        <td class="col-md-2 text-right">
+            <a class="btn btn-danger" data-toggle="modal" data-target="#regiaoModal"
+                ng-click="selecionarRegiao(regiao)"
+                ng-show="$root.getPermissao() === 'ADMINISTRADOR'">
+                <i class="glyphicon glyphicon-trash"></i>
+            </a>
+            <a class="btn btn-default" ng-href="#/formRegiao/{{regiao.codigo}}"
+                ng-show="$root.getPermissao() === 'ADMINISTRADOR'">
+                <i class="glyphicon glyphicon-edit"></i>
+            </a>
+        </td>
+    </tr>
+</table>
+<dir-pagination-controls boundary-links="true" on-page-change="pageChangeHandler(newPageNumber)" template-url="bower_components/angular-utils-pagination/dirPagination.tpl.html"></dir-pagination-controls>
+<!-- Modal -->
+<div class="modal fade" id="regiaoModal" tabindex="-1" role="dialog" aria-labelledby="regiaoModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="regiaoModalLabel">Excluir região metropolitana?</h4>
+            </div>
+            <div class="modal-body">
+                Deseja excluir o região metropolitana [{{regiao.nome}}]?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="removerRegiao()">Excluir</button>
+            </div>
+        </div>
+    </div>
+</div>

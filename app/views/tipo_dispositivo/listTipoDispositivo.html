@@ -1,0 +1,48 @@
+<h1>Listagem de tipos de dispositivos</h1>
+<div class="panel panel-default">
+    <div class="panel-body">
+        <a type="submit" class="btn btn-primary" ng-href="#/formTipoDispositivo"
+            ng-show="$root.getPermissao() === 'ADMINISTRADOR'">
+            <i class="glyphicon glyphicon-plus"></i> Adicionar
+        </a>
+    </div>
+</div>
+<table class="table table-striped">
+    <tr>
+        <th>Nome</th>
+        <th></th>
+    </tr>
+    <tr dir-paginate="dispositivo in tiposDispositivos | itemsPerPage: pageSize" current-page="currentPage">
+        <td>{{dispositivo.nome}}</td>
+        <td class="col-md-2 text-right">
+            <a class="btn btn-danger" data-toggle="modal" data-target="#dispositivoModal"
+                ng-click="selecionarTipoDispositivo(dispositivo)"
+                ng-show="$root.getPermissao() === 'ADMINISTRADOR'">
+                <i class="glyphicon glyphicon-trash"></i>
+            </a>
+            <a class="btn btn-default" ng-href="#/formTipoDispositivo/{{dispositivo.codigo}}"
+                ng-show="$root.getPermissao() === 'ADMINISTRADOR'">
+                <i class="glyphicon glyphicon-edit"></i>
+            </a>
+        </td>
+    </tr>
+</table>
+<dir-pagination-controls boundary-links="true" on-page-change="pageChangeHandler(newPageNumber)" template-url="bower_components/angular-utils-pagination/dirPagination.tpl.html"></dir-pagination-controls>
+<!-- Modal -->
+<div class="modal fade" id="dispositivoModal" tabindex="-1" role="dialog" aria-labelledby="dispositivoModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="dispositivoModalLabel">Excluir tipo de dispositivo?</h4>
+            </div>
+            <div class="modal-body">
+                Deseja excluir o tipo de dispositivo [{{dispositivo.nome}}]?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="removerTipoDispositivo()">Excluir</button>
+            </div>
+        </div>
+    </div>
+</div>

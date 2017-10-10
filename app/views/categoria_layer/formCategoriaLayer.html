@@ -1,0 +1,27 @@
+<h1>Formulário da categoria de layer</h1>
+<div class="panel panel-default">
+    <div class="panel-body">
+        <a type="submit" class="btn btn-primary" ng-href="#/listCategoriaLayer">
+            <i class="glyphicon glyphicon-chevron-left"></i> Voltar
+        </a>
+    </div>
+</div>
+<form name="formCategoriaLayer" class="form-horizontal">
+    <div class="form-group" ng-class="{'has-error' : isInvalidField('inputNome')}">
+        <label class="control-label col-md-2" for="inputNome">Nome</label>
+        <div class="col-md-6">
+            <input name="inputNome"
+                   type="text"
+                   class="form-control"
+                   id="inputNome"
+                   placeholder="Nome da categoria de layer"
+                   ng-model="categoriaLayer.nome"
+                   required>
+        </div>
+        <span class="help-block col-md-4" ng-show="isInvalidField('inputNome')">Campo é obrigatório!</span>
+  
+    <hr>
+    <a type="submit" class="btn btn-default" ng-click="limpar()">Limpar</a>
+    <a type="submit" class="btn btn-primary" ng-click="salvar()" ng-show="!categoriaLayer.codigo" ng-disabled="!isInvalidForm()">Salvar</a>
+    <a type="submit" class="btn btn-primary" ng-click="editar()" ng-show="categoriaLayer.codigo" ng-disabled="!isInvalidForm()">Editar</a>
+</form>

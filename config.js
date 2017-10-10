@@ -1,0 +1,11 @@
+var config = {};
+config.postgres = "postgres://postgres:1234@localhost/imap";
+config.port = 3000;
+config.session = {};
+config.session.pass = 'imap';
+config.session.time = 360000;
+config.gamefication = {};
+config.gamefication.solicitado = 1;
+config.gamefication.aprovado = 2;
+config.gamefication.rejeitado = 0;
+module.exports = config;

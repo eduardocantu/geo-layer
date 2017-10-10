@@ -1,0 +1,27 @@
+<h1>Formulário do região metropolitana</h1>
+<div class="panel panel-default">
+    <div class="panel-body">
+        <a type="submit" class="btn btn-primary" ng-href="#/listRegiao">
+            <i class="glyphicon glyphicon-chevron-left"></i> Voltar
+        </a>
+    </div>
+</div>
+<form name="formRegiao" class="form-horizontal">
+    <div class="form-group" ng-class="{'has-error' : isInvalidField('inputNome')}">
+        <label class="control-label col-md-2" for="inputNome">Nome</label>
+        <div class="col-md-6">
+            <input name="inputNome"
+                   type="text"
+                   class="form-control"
+                   id="inputNome"
+                   placeholder="Nome da região metropolitana"
+                   ng-model="regiao.nome"
+                   required>
+        </div>
+        <span class="help-block col-md-4" ng-show="isInvalidField('inputNome')">Campo é obrigatório!</span>
+    </div>
+    <hr>
+    <a type="submit" class="btn btn-default" ng-click="limpar()">Limpar</a>
+    <a type="submit" class="btn btn-primary" ng-click="salvar()" ng-show="!regiao.codigo" ng-disabled="!isInvalidForm()">Salvar</a>
+    <a type="submit" class="btn btn-primary" ng-click="editar()" ng-show="regiao.codigo" ng-disabled="!isInvalidForm()">Editar</a>
+</form>

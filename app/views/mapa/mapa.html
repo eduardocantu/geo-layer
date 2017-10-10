@@ -1,0 +1,411 @@
+<form class="form-inline">
+    <div class="col-md-2">
+            <p class="input-group">
+                <input type="text"
+                       ng-disabled="playing"
+                       class="form-control"
+                       ng-model="dataInicial"
+                       datepicker-popup="{{'dd/MM/yyyy'}}" 
+                       is-open="openedInicial"
+                       datepicker-options="dateOptions"
+                       close-text="Close" />
+                <span class="input-group-btn">
+                    <button type="button"
+                            ng-disabled="playing"
+                            class="btn btn-default"
+                            ng-click="openInicial($event)">
+                        <i class="glyphicon glyphicon-calendar"></i>
+                    </button>
+                </span>
+            </p>
+    </div>
+    <div class="col-md-5">
+            <p class="input-group">
+                <div id="slider"></div> 
+            </p>
+    </div>
+    <div class="col-md-2">
+            <p class="input-group">
+                <input type="text"
+                       ng-disabled="playing"
+                       class="form-control"
+                       ng-model="dataFinal"
+                       datepicker-popup="{{'dd/MM/yyyy'}}" 
+                       is-open="openedFinal"
+                       datepicker-options="dateOptions"
+                       close-text="Close" />
+                <span class="input-group-btn">
+                    <button type="button"
+                            ng-disabled="playing"
+                            class="btn btn-default"
+                            ng-click="openFinal($event)">
+                        <i class="glyphicon glyphicon-calendar"></i>
+                    </button>
+                </span>
+            </p>
+    </div>
+    <div class="form-group">
+        <div class="col-md-4">
+            <p class="input-group">
+                <a class="btn btn-primary" ng-click="filtrar()" ng-disabled="playing">Filtrar</a>
+            </p>
+        </div>
+        <div class="col-md-8">
+            <p class="input-group btn-group btn-group">
+                <a class="btn btn-primary" ng-click="play()" ng-disabled="playing">
+                  <i class="glyphicon glyphicon-play"></i>
+                </a>
+                <a class="btn btn-primary" ng-click="pause()" ng-disabled="!playing">
+                  <i class="glyphicon glyphicon-pause"></i>
+                </a>
+                <a class="btn btn-primary" ng-click="stop()">
+                  <i class="glyphicon glyphicon-stop"></i>
+                </a>
+            </p>
+        </div>
+    </div>
+</form>
+<hr/>
+<div class="col-md-2">
+    <table class="table table-condensed">
+        <tr>
+            <th colspan="3">
+                <a class="btn btn-link btn-xs"
+                   title="Adicionar grupo"
+                   ng-click="novoGrupo()"
+                   data-toggle="modal"
+                   data-target="#adicionar-grupo-modal">
+                    <i class="glyphicon glyphicon-folder-open"></i>
+                </a>
+
+                <a class="btn btn-link btn-xs"
+                   title="Editar item selecionado"
+                   data-toggle="modal"
+                   ng-click="editarFormulario()"
+                   ng-attr-data-target="{{ layerSelecionado ? '#adicionar-layer-modal' : '#adicionar-grupo-modal' }}"
+                   ng-disabled="!layerSelecionado && !grupoSelecionado">
+                    <i class="glyphicon glyphicon-cog"></i>
+                </a>
+
+                <a class="btn btn-link btn-xs pull-right"
+                   title="Remover item selecionado"
+                   data-toggle="modal"
+                   data-target="#remover-item-modal"
+                   ng-disabled="!layerSelecionado && !grupoSelecionado">
+                    <i class="glyphicon glyphicon-trash"></i>
+                </a>
+            </th>
+        </tr>
+        <tr
+            ng-repeat-start="grupo in grupos"
+            ng-init="visivel = true"
+            ng-class="{'list-group-item-info' : grupoSelecionado == grupo}">
+            <td class="text-capitalize">
+                <a class="btn btn-link btn-xs" ng-click="visivel = !visivel">
+                    <i class="glyphicon glyphicon-chevron-up" ng-show="visivel"></i>
+                    <i class="glyphicon glyphicon-chevron-down" ng-hide="visivel"></i>
+                </a>
+            </td>
+            <td class="text-capitalize">
+                <a class="btn btn-link btn-xs" ng-click="selecionarGrupo(grupo)" title="{{grupo.nome}}"
+                ng-bind="grupo.nome"></a>
+            </td>
+            <td class="text-capitalize">
+                <a class="btn btn-link btn-xs pull-right"
+                   title="Adicionar layer"
+                   ng-click="novoLayer(grupo)"
+                   data-toggle="modal"
+                   data-target="#adicionar-layer-modal">
+                    <i class="glyphicon glyphicon-plus"></i>
+                </a>
+            </td>
+        </tr>
+        <tr
+            ng-show="visivel"
+            ng-repeat="layer in grupo.layers"
+            ng-class="{'list-group-item-info' : layerSelecionado.codigo == layer.codigo}">
+            <td class="text-capitalize">
+                <div class="col-sm-1">&nbsp;</div>
+            </td>
+            <td class="text-capitalize">
+                <div class="text-capitalize">
+                    <a class="btn btn-link btn-xs" ng-click="toggleVisivel(layer)">
+                        <i class="glyphicon glyphicon-eye-open" ng-show="layer.visivel_aux"></i>
+                        <i class="glyphicon glyphicon-eye-close" ng-hide="layer.visivel_aux"></i>
+                    </a>
+                    <a class="btn btn-link btn-xs" ng-click="selecionarLayer(layer)" title="{{layer.nome}}"
+                    ng-bind="layer.nome"></a>
+                </div>
+            </td>
+            <td class="text-capitalize">
+              <a class="btn btn-link btn-xs pull-right"
+                     title="Adicionar dispositivo"
+                     ng-click="novoDispositivo(layer)"
+                     data-toggle="modal"
+                     data-target="#adicionar-dispositivo-modal"
+                     ng-hide="layer.tipo !== 'DISPOSITIVO'">
+                      <i class="glyphicon glyphicon-plus"></i>
+                    </a>
+            </td>
+        </tr>
+        <tr ng-repeat-end ng-if="false"></tr>
+    </table>
+</div>
+
+<div class="col-md-8">
+    <div id="popup-dispositivo" class="ol-popup" style="width:300px">
+        <div id="popup-content">
+            {{dispositivoSelecionado.endereco}}
+        <hr />
+        <div class="form-group">
+            <label class="control-label" for="inputDescricaoDispositivo">Descrição</label>
+            <div>
+              <input name="inputDescricaoDispositivo"
+                               type="text"
+                               class="form-control"
+                               id="inputDescricaoDispositivo"
+                               placeholder="Descrição do dispositivo"
+                               ng-model="dispositivoSelecionado.descricao">
+            </div>
+        </div>
+        </div>
+            <div class="modal-footer">
+                <a class="btn btn-default"
+                   ng-click="cancelarDispositivo()">Cancelar
+                </a>
+                <a class="btn btn-primary"
+                   data-dismiss="modal"
+                   ng-show="dispositivoSelecionado.codigo"
+                   ng-click="editarDispositivo()">Editar
+                </a>
+                <a class="btn btn-primary"
+                   data-dismiss="modal"
+                   ng-show="!dispositivoSelecionado.codigo"
+                   ng-click="salvarDispositivo()">Salvar
+                </a>
+            </div>
+    </div>  
+    <div id="popup" class="ol-popup" style="width:300px">
+        <div id="popup-content">
+            {{pontoSelecionado.descricao}}
+        </div>
+    </div>
+    <div id="map" class="smallmap"></div>
+</div>
+
+<div class="col-md-2">
+    <table class="table table-condensed" ng-if="!pontoSelecionado">
+        <tr>
+            <th>
+                Ocorrências pendentes
+            </th>
+        </tr>
+        <tr ng-repeat-start="grupo in grupos" ng-if="false"></tr>
+        <tr ng-repeat-start="layer in grupo.layers" ng-if="false"></tr>
+        <tr
+            ng-class="{'list-group-item-info' : pontoSelecionado.codigo == ponto.codigo}"
+            ng-repeat="ponto in layer.pontos| filter:{status:'PENDENTE'}">
+            <td>
+                <a class="btn btn-link btn-xs" ng-click="selecionarPonto(ponto)">
+                    {{ponto.descricao}}
+                </a>
+            </td>
+        </tr>
+        <tr ng-repeat-end ng-if="false"></tr>
+        <tr ng-repeat-end ng-if="false"></tr>
+    </table>
+    <div ng-hide="!pontoSelecionado">
+        <label>Dados da ocorrência</label>
+        <form>
+            <div class="form-group">
+                <label>Descrição:</label>
+                <span>{{pontoSelecionado.descricao}}</span>
+            </div>
+            <div class="form-group">
+                <label>Status:</label>
+                <span>{{statuses[pontoSelecionado.status]}}</span>
+            </div>
+            <div class="form-group">
+                <label>Data:</label>
+                <span>{{pontoSelecionado.data | date:'dd/MM/yyyy'}}</span>
+            </div>
+            <div class="form-group" ng-hide="pontoSelecionado.status != 'PENDENTE'">
+                <label for="inputProtocolo">Protocolo:</label>
+                <select ng-model="protocoloSelecionado"
+                        ng-change="alterarProtocoloSelecionado()"
+                        class="form-control"
+                        name="inputProtocolo"
+                        ng-options="protocolo as protocolo.nome for protocolo in protocolos">
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="inputDescricaoProtocolo">Descrição:</label>
+                <span ng-hide="pontoSelecionado.status == 'PENDENTE'">{{pontoSelecionado.descricao_autorizado || 'vazio'}}</span>
+                <textarea class="form-control" rows="3" ng-model="descricaoProtocolo" ng-hide="pontoSelecionado.status != 'PENDENTE'"></textarea>
+            </div>
+            <div class="modal-footer" ng-hide="pontoSelecionado.status != 'PENDENTE'">
+                <a class="btn btn-danger btn-sm" ng-click="rejeitarPonto()">Rejeitar</a>
+                <a class="btn btn-success btn-sm" ng-click="aprovarPonto()">Aprovar</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+<!-- Modal Remover -->
+<div class="modal fade" id="remover-item-modal" tabindex="-1" role="dialog" aria-labelledby="remover-item-modal-label" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="layerModalLabel" ng-if="layerSelecionado && !grupoSelecionado">Excluir layer?</h4>
+                <h4 class="modal-title" id="layerModalLabel" ng-if="!layerSelecionado && grupoSelecionado">Excluir grupo?</h4>
+            </div>
+            <div class="modal-body">
+                <p ng-if="layerSelecionado && !grupoSelecionado">
+                    Deseja excluir o layer [{{layerSelecionado.nome}}]?
+                </p>
+                <p ng-if="!layerSelecionado && grupoSelecionado">
+                    Deseja excluir o grupo [{{grupoSelecionado.nome}}]?
+                </p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="remover()">Excluir</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Adicnionar grupo -->
+<div class="modal fade" id="adicionar-grupo-modal" tabindex="-1" role="dialog" aria-labelledby="adicionar-grupo-modal" aria-hidden="true">
+    <div class="modal-dialog">
+        <form name="formGrupo" class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="grupo-modal-grupo">Formulário do grupo</h4>
+            </div>
+            <div class="modal-body form-horizontal">
+                <div class="form-group" ng-class="{'has-error' : isInvalidField('formGrupo', 'inputNome')}">
+                    <label class="control-label col-md-2" for="inputNome">Nome</label>
+                    <div class="col-md-6">
+                        <input name="inputNome"
+                               type="text"
+                               class="form-control"
+                               id="inputNome"
+                               placeholder="Nome do grupo"
+                               ng-model="grupoFormulario.nome"
+                               required>
+                    </div>
+                    <span class="help-block col-md-4" ng-show="isInvalidField('formGrupo', 'inputNome')">Campo é obrigatório!</span>
+                </div>
+                <div class="form-group" ng-class="{'has-error' : isInvalidField('formGrupo', 'inputDescricao')}">
+                    <label class="control-label col-md-2" for="inputDescricao">Descrição</label>
+                    <div class="col-md-6">
+                        <input name="inputDescricao"
+                               type="text"
+                               class="form-control"
+                               id="inputDescricao"
+                               placeholder="Descrição do grupo"
+                               ng-model="grupoFormulario.descricao"
+                               required>
+                    </div>
+                    <span class="help-block col-md-4" ng-show="isInvalidField('formGrupo', 'inputDescricao')">Campo é obrigatório!</span>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <a class="btn btn-default"
+                   data-dismiss="modal">Cancelar
+                </a>
+                <a class="btn btn-primary"
+                   data-dismiss="modal"
+                   ng-show="grupoFormulario.codigo"
+                   ng-click="editarGrupo()">Editar
+                </a>
+                <a class="btn btn-primary"
+                   data-dismiss="modal"
+                   ng-show="!grupoFormulario.codigo"
+                   ng-click="salvarGrupo()"
+                   ng-disabled="!isInvalidForm('formGrupo')">Salvar
+                </a>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- Modal Adicnionar layer -->
+<div class="modal fade" id="adicionar-layer-modal" tabindex="-1" role="dialog" aria-labelledby="adicionar-layer-modal" aria-hidden="true">
+    <div class="modal-dialog">
+        <form name="formLayer" class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="layer-modal-layer">Formulário do layer</h4>
+            </div>
+            <div class="modal-body form-horizontal">
+                <div class="form-group" ng-class="{'has-error' : isInvalidField('formLayer', 'inputNome')}">
+                    <label class="control-label col-md-2" for="inputNome">Nome</label>
+                    <div class="col-md-6">
+                        <input name="inputNome"
+                               type="text"
+                               class="form-control"
+                               id="inputNome"
+                               placeholder="Nome do layer"
+                               ng-model="layerFormulario.nome"
+                               required>
+                    </div>
+                    <span class="help-block col-md-4" ng-show="isInvalidField('formLayer', 'inputNome')">Campo é obrigatório!</span>
+                </div>
+                <div class="form-group" ng-class="{'has-error' : isInvalidField('formLayer', 'inputDescricao')}">
+                    <label class="control-label col-md-2" for="inputDescricao">Descrição</label>
+                    <div class="col-md-6">
+                        <input name="inputDescricao"
+                               type="text"
+                               class="form-control"
+                               id="inputDescricao"
+                               placeholder="Descrição do layer"
+                               ng-model="layerFormulario.descricao"
+                               required>
+                    </div>
+                    <span class="help-block col-md-4" ng-show="isInvalidField('formLayer', 'inputDescricao')">Campo é obrigatório!</span>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-2" for="inputFormatos">Formato</label>
+                    <div class="col-md-6">
+                        <select ng-model="layerFormulario.formato"
+                                class="form-control"
+                                name="inputFormatos"
+                                ng-options="formato.valor as formato.nome for formato in formatos">
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-2" for="inputCor">Cor</label>
+                    <div class="col-md-6">
+                        <select ng-model="layerFormulario.cor"
+                                class="form-control"
+                                name="inputCor"
+                                ng-options="cor.valor as cor.nome for cor in cores">
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <a class="btn btn-default"
+                   data-dismiss="modal">Cancelar
+                </a>
+                <a class="btn btn-primary"
+                   data-dismiss="modal"
+                   ng-show="layerFormulario.codigo"
+                   ng-click="editarLayer()"
+                   ng-disabled="!isInvalidForm('formLayer')">Editar
+                </a>
+                <a class="btn btn-primary"
+                   data-dismiss="modal"
+                   ng-show="!layerFormulario.codigo"
+                   ng-click="salvarLayer()"
+                   ng-disabled="!isInvalidForm('formLayer')">Salvar
+                </a>
+            </div>
+        </form>
+    </div>
+</div>

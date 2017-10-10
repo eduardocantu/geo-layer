@@ -1,0 +1,104 @@
+<h1>Formulário do layer</h1>
+<div class="panel panel-default">
+    <div class="panel-body">
+        <a type="submit" class="btn btn-primary" ng-href="#/listLayer">
+            <i class="glyphicon glyphicon-chevron-left"></i> Voltar
+        </a>
+    </div>
+</div>
+<form name="formLayer" class="form-horizontal">
+
+    <div class="form-group" ng-class="{'has-error' : isInvalidField('inputTipo')}">
+        <label class="control-label col-md-2" for="inputTipo">Tipo</label>
+        <div class="col-md-6">
+            <select name="inputTipo"
+                    id="inputTipo"
+                    class="form-control"
+                    ng-model="layer.tipo"
+                    ng-options="tipo.valor as tipo.nome for tipo in tipos">
+            </select>
+        </div>
+    </div>  
+
+    <div class="form-group" ng-class="{'has-error' : isInvalidField('inputGrupo')}">
+        <label class="control-label col-md-2" for="inputGrupo">Grupo do Layer</label>
+        <div class="col-md-6">
+            <select name="inputGrupo"
+                    id="inputGrupo"
+                    class="form-control"
+                    ng-model="layer.codigo_grupo"
+                    ng-options="grupo.codigo as grupo.nome for grupo in grupos">
+            </select>
+        </div>
+    </div> 
+
+    <div class="form-group" ng-class="{'has-error' : isInvalidField('inputCategoria')}">
+        <label class="control-label col-md-2" for="inputCategoria">Categoria de Layer</label>
+        <div class="col-md-6">
+            <select name="inputCategoria"
+                    id="inputCategoria"
+                    class="form-control"
+                    ng-model="layer.codigo_categoria_layer"
+                    ng-options="categoria.codigo as categoria.nome for categoria in categoriasLayer">
+            </select>
+        </div>
+    </div> 
+
+
+    <div class="form-group" ng-class="{'has-error' : isInvalidField('inputNome')}">
+        <label class="control-label col-md-2" for="inputNome">Nome</label>
+        <div class="col-md-6">
+            <input name="inputNome"
+                   type="text"
+                   class="form-control"
+                   id="inputNome"
+                   placeholder="Nome do layer"
+                   ng-model="layer.nome"
+                   required>
+        </div>
+        <span class="help-block col-md-4" ng-show="isInvalidField('inputNome')">Campo é obrigatório!</span>
+    </div>
+
+    <div class="form-group" ng-class="{'has-error' : isInvalidField('inputDescricao')}">
+        <label class="control-label col-md-2" for="inputDescricao">Descrição</label>
+        <div class="col-md-6">
+           <input name="inputDescricao"
+                   type="text"
+                   class="form-control"
+                   id="inputDescricao"
+                   placeholder="Descrição do layer"
+                   ng-model="layer.descricao"
+                   required>
+            </div>
+        </div>
+    </div>    
+
+    <div class="form-group" ng-class="{'has-error' : isInvalidField('inputFormato')}">
+        <label class="control-label col-md-2" for="inputFormato">Formato dos pontos</label>
+        <div class="col-md-6">
+            <select name="inputFormato"
+                    id="inputFormato"
+                    class="form-control"
+                    ng-model="layer.formato"
+                    ng-options="formato.valor as formato.nome for formato in formatos">
+            </select>
+        </div>
+    </div>  
+
+    <div class="form-group" ng-class="{'has-error' : isInvalidField('inputCor')}">
+        <label class="control-label col-md-2" for="inputCor">Cor dos pontos</label>
+        <div class="col-md-6">
+            <select name="inputCor"
+                    id="inputCor"
+                    class="form-control"
+                    ng-model="layer.cor"
+                    ng-options="cor.valor as cor.nome for cor in cores">
+            </select>
+        </div>
+    </div>  
+
+    <hr>
+    <a type="submit" class="btn btn-default" ng-click="limpar()">Limpar</a>
+    <a type="submit" class="btn btn-primary" ng-click="salvar()" ng-show="!layer.codigo" ng-disabled="!isInvalidForm()">Salvar</a>
+    <a type="submit" class="btn btn-primary" ng-click="editar()" ng-show="layer.codigo" ng-disabled="!isInvalidForm()">Editar</a>
+</form>

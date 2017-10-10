@@ -1,0 +1,39 @@
+<h1>Formulário do município</h1>
+<div class="panel panel-default">
+    <div class="panel-body">
+        <a type="submit" class="btn btn-primary" ng-href="#/listMunicipio">
+            <i class="glyphicon glyphicon-chevron-left"></i> Voltar
+        </a>
+    </div>
+</div>
+<form name="formMunicipio" class="form-horizontal">
+    <div class="form-group" ng-class="{'has-error' : isInvalidField('inputNome')}">
+        <label class="control-label col-md-2" for="inputNome">Nome</label>
+        <div class="col-md-6">
+            <input name="inputNome"
+                   type="text"
+                   class="form-control"
+                   id="inputNome"
+                   placeholder="Nome do município"
+                   ng-model="municipio.nome"
+                   required>
+        </div>
+        <span class="help-block col-md-4" ng-show="isInvalidField('inputNome')">Campo é obrigatório!</span>
+    </div>
+
+    <div class="form-group" ng-class="{'has-error' : isInvalidField('inputRegiao')}">
+        <label class="control-label col-md-2" for="inputRegiao">Região Metropolitana</label>
+        <div class="col-md-6">
+            <select name="inputRegiao"
+                    id="inputRegiao"
+                    class="form-control"
+                    ng-model="municipio.codigo_regiao"
+                    ng-options="regiao.codigo as regiao.nome for regiao in regioes">
+            </select>
+        </div>
+    </div>    
+    <hr>
+    <a type="submit" class="btn btn-default" ng-click="limpar()">Limpar</a>
+    <a type="submit" class="btn btn-primary" ng-click="salvar()" ng-show="!municipio.codigo" ng-disabled="!isInvalidForm()">Salvar</a>
+    <a type="submit" class="btn btn-primary" ng-click="editar()" ng-show="municipio.codigo" ng-disabled="!isInvalidForm()">Editar</a>
+</form>

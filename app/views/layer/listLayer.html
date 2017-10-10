@@ -1,0 +1,56 @@
+<h1>Listagem de layers</h1>
+<div class="panel panel-default">
+    <div class="panel-body">
+        <a type="submit" class="btn btn-primary" ng-href="#/formLayer"
+            ng-show="$root.getPermissao() === 'ADMINISTRADOR'">
+            <i class="glyphicon glyphicon-plus"></i> Adicionar
+        </a>
+    </div>
+</div>
+<table class="table table-striped">
+    <tr>
+        <th>Nome</th>
+        <th>Descrição</th>
+        <th>Formato</th>
+        <th>Cor</th>
+        <th>Tipo</th>
+        <th></th>
+    </tr>
+    <tr dir-paginate="layer in layers | itemsPerPage: pageSize" current-page="currentPage">
+        <td>{{layer.nome}}</td>
+        <td>{{layer.descricao}}</td>
+        <td>{{layer.formato}}</td>
+        <td>{{layer.cor}}</td>
+        <td>{{layer.tipo}}</td>
+        <td class="col-md-2 text-right">
+            <a class="btn btn-danger" data-toggle="modal" data-target="#layerModal"
+                ng-click="selecionarLayer(layer)"
+                ng-show="$root.getPermissao() === 'ADMINISTRADOR'">
+                <i class="glyphicon glyphicon-trash"></i>
+            </a>
+            <a class="btn btn-default" ng-href="#/formLayer/{{layer.codigo}}"
+                ng-show="$root.getPermissao() === 'ADMINISTRADOR'">
+                <i class="glyphicon glyphicon-edit"></i>
+            </a>
+        </td>
+    </tr>
+</table>
+<dir-pagination-controls boundary-links="true" on-page-change="pageChangeHandler(newPageNumber)" template-url="bower_components/angular-utils-pagination/dirPagination.tpl.html"></dir-pagination-controls>
+<!-- Modal -->
+<div class="modal fade" id="layerModal" tabindex="-1" role="dialog" aria-labelledby="layerModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="layerModalLabel">Excluir layer?</h4>
+            </div>
+            <div class="modal-body">
+                Deseja excluir o layer [{{layer.nome}}]?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="removerLayer()">Excluir</button>
+            </div>
+        </div>
+    </div>
+</div>

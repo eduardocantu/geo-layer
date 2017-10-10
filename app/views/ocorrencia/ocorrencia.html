@@ -1,0 +1,16 @@
+<h1>Minhas ocorrências</h1>
+<table class="table table-striped">
+    <tr>
+        <th>Data da ocorrência</th>
+        <th>Status</th>
+        <th>Data da alteração do status</th>
+         <th>Descrição</th>
+    </tr>
+    <tr dir-paginate="ocorrencia in ocorrencias | itemsPerPage: pageSize" current-page="currentPage">
+        <td>{{ocorrencia.data | date:'dd/MM/yyyy'}}</td>
+        <td>{{ocorrencia.status}}</td>
+        <td>{{ocorrencia.status_data | date:'dd/MM/yyyy'}}</td>
+        <td>{{ocorrencia.descricao_autorizado}}</td>
+    </tr>
+</table>
+<dir-pagination-controls boundary-links="true" on-page-change="pageChangeHandler(newPageNumber)" template-url="bower_components/angular-utils-pagination/dirPagination.tpl.html"></dir-pagination-controls>

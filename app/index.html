@@ -1,0 +1,180 @@
+<!doctype html>
+<html class="no-js">
+    <head>
+        <meta charset="utf-8">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width">
+        <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+        <!-- build:css(.) styles/vendor.css -->
+        <!-- bower:css -->
+        <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
+        <link rel="stylesheet" href="styles/ol.css" type="text/css" />
+        <!-- endbower -->
+        <!-- endbuild -->
+        <!-- build:css(.tmp) styles/main.css -->
+        <link rel="stylesheet" href="styles/style.css" />
+        <style>
+            .container {
+                width: 100%;
+            }
+        </style>
+
+    <link rel="stylesheet" id="themeCSS" href="/scripts/JRange/classic.css"> 
+    <link rel="stylesheet" href="/scripts/JRange/style.css">
+
+    </head>
+    <body ng-app="geoLayerApp">
+        <!--[if lt IE 7]>
+          <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+
+        <!-- Add your site or application content here -->
+        <div class="header" ng-controller="AuthCtrl">
+            <nav class="navbar navbar-inverse navbar-fixed-top">
+                <div class="container">
+                    <div class="navbar-header">
+                        <a class="navbar-brand" href="#">iMap</a>
+                    </div>
+                    <div class="collapse navbar-collapse">
+                        <ul class="nav navbar-nav" data-ng-show="$root.token">
+                             <li  class="active"><a href="#/mapa">Inicio</a></li>
+                             <li class="dropdown">
+                              <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Cadastro <span class="caret"></span></a>
+                              <ul class="dropdown-menu">
+                                <li><a href="#/listUsuario">Usuários</a></li>
+                                <li><a href="#/listProtocolo">Protocolos</a></li>
+                              </ul>
+                            </li>
+                             <li class="dropdown">
+                              <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                Região <span class="caret"></span></a>
+                              <ul class="dropdown-menu">
+                                <li ><a ng-href="#/listRegiao">Regiões Metropolitanas</a></li>
+                                <li ><a ng-href="#/listMunicipio">Municípios</a></li>
+                              </ul>
+                            </li>
+                             <li class="dropdown" >
+                              <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                Camadas <span class="caret"></span></a>
+                              <ul class="dropdown-menu">
+                                <li ><a ng-href="#/listGrupo">Grupos</a></li>
+                                <li ><a ng-href="#/listCategoriaLayer">Categoria de Layer</a></li>
+                                <li ><a ng-href="#/listLayer">Layers</a></li>
+                                <li><a href="#/listTipoDispositivo">Tipo de dispositivos</a></li>
+                                <li><a href="#/listDispositivo">Dispositivos</a></li>
+                              </ul>
+                            </li>
+                            <li class="dropdown" >
+                              <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                Usuário <span class="caret"></span></a>
+                              <ul class="dropdown-menu">
+                                <li ><a ng-href="#/gamefication">Gamefication</a></li>
+                                <li ><a ng-href="#/minhasOcorrencias">Minhas ocorrências</a></li>
+                                <li ><a ng-href="#/listCategoriaLayer">Perfil</a></li>
+                              </ul>
+                            </li>
+                        </ul>
+                        <form  data-ng-show="$root.token" class="navbar-form navbar-right" ng-submit="logout()">
+                            <div class="form-group">
+                                <span>{{email}}</span>
+                            </div>
+                            <button type="submit" class="btn btn-danger">Logout</button>
+                        </form>
+                    </div><!--/.navbar-collapse -->
+                </div>
+            </nav>
+        </div>
+
+        <div class="container">
+            <br><br><br>
+            <mensagem></mensagem>
+            <div ng-view="" class="row"></div>
+            <hr>
+            <footer>
+                <p>© Company 2014</p>
+            </footer>
+        </div>
+     
+        <script src="scripts/utils/ol.js"></script>
+        <script src="bower_components/jquery/jquery.min.js"></script>
+        <script src="bower_components/jquery-ui/ui/minified/jquery-ui.min.js"></script>
+        <script src="bower_components/angular/angular.js"></script>
+        <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+        <script src="bower_components/angular-animate/angular-animate.js"></script>
+        <script src="bower_components/angular-aria/angular-aria.js"></script>
+        <script src="bower_components/angular-cookies/angular-cookies.js"></script>
+        <script src="bower_components/angular-messages/angular-messages.js"></script>
+        <script src="bower_components/angular-resource/angular-resource.js"></script>
+        <script src="bower_components/angular-route/angular-route.js"></script>
+        <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+        <script src="bower_components/angular-touch/angular-touch.js"></script>
+        <script src="bower_components/angular-utils-pagination/dirPagination.js"></script>
+        <script src="bower_components/ngstorage/ngStorage.js"></script>
+        <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+        <!-- endbower -->
+
+        <!-- build:js({.tmp,app}) app/scripts/scripts.js -->
+        <script src="scripts/app.js"></script>
+        <script src="scripts/utils/config.js"></script>
+        <script src="scripts/filters/dateRange.js"></script>
+
+        <script src="scripts/constants/formatos.js"></script>
+        <script src="scripts/constants/permissao.js"></script>
+        <script src="scripts/constants/cores.js"></script>
+        <script src="scripts/constants/status-ocorrencia.js"></script>
+        <script src="scripts/constants/tipo-layer.js"></script>
+        <!-- endbuild -->
+        <!-- TODO APAGAR -->
+
+        <script src="scripts/modules/ng-grid.js"></script>
+        <script src="scripts/modules/ng-pick.js"></script>
+        <script src="scripts/modules/ng-spinner.js"></script>
+        <script src="scripts/modules/components.js"></script>
+        <script src="scripts/directives/mensagem.js"></script>
+        <script src="scripts/directives/map-main.js"></script>
+        <script src="scripts/directives/map-overlay.js"></script>
+        <script src="scripts/directives/map-layer.js"></script>
+
+        <script src="scripts/resource.js"></script>
+
+        <script src="scripts/utils/crudService.js"></script>
+        <script src="scripts/controllers/usuario/usuarioService.js"></script>
+        <script src="scripts/controllers/regiao/regiaoService.js"></script>
+        <script src="scripts/controllers/gamefication/gameficationService.js"></script>
+        <script src="scripts/controllers/ocorrencia/ocorrenciaService.js"></script>
+        <script src="scripts/controllers/categoria_layer/categoriaLayerService.js"></script>
+        <script src="scripts/controllers/tipo_dispositivo/tipoDispositivoService.js"></script>
+        <script src="scripts/controllers/dispositivo/dispositivoService.js"></script>
+        <script src="scripts/controllers/municipio/municipioService.js"></script>
+        <script src="scripts/controllers/grupo/grupoService.js"></script>
+        <script src="scripts/controllers/layer/layerService.js"></script>
+        <script src="scripts/controllers/protocolo/protocoloService.js"></script>
+        <script src="scripts/controllers/mapa/mapaService.js"></script>
+        <script src="scripts/controllers/mapa/googleApiService.js"></script>
+        <script src="scripts/controllers/auth/authService.js"></script>
+        <script src="scripts/controllers/auth/auth.js"></script>
+        <script src="scripts/controllers/usuario/listUsuario.js"></script>
+        <script src="scripts/controllers/usuario/formUsuario.js"></script>
+        <script src="scripts/controllers/regiao/listRegiao.js"></script>
+        <script src="scripts/controllers/regiao/formRegiao.js"></script>
+        <script src="scripts/controllers/gamefication/gamefication.js"></script>
+        <script src="scripts/controllers/ocorrencia/ocorrencia.js"></script>
+        <script src="scripts/controllers/categoria_layer/listCategoriaLayer.js"></script>
+        <script src="scripts/controllers/categoria_layer/formCategoriaLayer.js"></script>
+        <script src="scripts/controllers/tipo_dispositivo/listTipoDispositivo.js"></script>
+        <script src="scripts/controllers/tipo_dispositivo/formTipoDispositivo.js"></script>
+        <script src="scripts/controllers/municipio/listMunicipio.js"></script>
+        <script src="scripts/controllers/municipio/formMunicipio.js"></script>
+        <script src="scripts/controllers/protocolo/listProtocolo.js"></script>
+        <script src="scripts/controllers/protocolo/formProtocolo.js"></script>
+        <script src="scripts/controllers/grupo/listGrupo.js"></script>
+        <script src="scripts/controllers/grupo/formGrupo.js"></script>
+        <script src="scripts/controllers/layer/listLayer.js"></script>
+        <script src="scripts/controllers/layer/formLayer.js"></script>
+        <script src="scripts/controllers/dispositivo/listDispositivo.js"></script>
+        <script src="scripts/controllers/dispositivo/formDispositivo.js"></script>
+        <script src="scripts/controllers/mapa/Mapa.js"></script>
+        <script src="scripts/JRange/jQDateRangeSlider-min.js"></script>
+    </body>
+</html>

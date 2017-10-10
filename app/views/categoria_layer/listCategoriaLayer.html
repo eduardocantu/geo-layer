@@ -1,0 +1,49 @@
+<h1>Listagem de categorias de layer</h1>
+<div class="panel panel-default">
+    <div class="panel-body">
+        <a type="submit" class="btn btn-primary" ng-href="#/formCategoriaLayer" 
+            ng-show="$root.getPermissao() === 'ADMINISTRADOR'">
+            <i class="glyphicon glyphicon-plus"></i> Adicionar
+        </a>
+    </div>
+</div>
+<table class="table table-striped">
+    <tr>
+        <th>Nome</th>
+        <th></th>
+    </tr>
+    <tr dir-paginate="categoria in categoriasLayer | itemsPerPage: pageSize" current-page="currentPage">
+        <td>{{categoria.nome}}</td>
+        <td class="col-md-2 text-right">
+            <a class="btn btn-danger" data-toggle="modal" data-target="#categoriaLayerModal"
+            ng-click="selecionarCategoriaLayer(categoria)"
+            ng-show="$root.getPermissao() === 'ADMINISTRADOR'">
+                <i class="glyphicon glyphicon-trash"></i>
+            </a>
+            <a class="btn btn-default" ng-href="#/formCategoriaLayer/{{categoria.codigo}}"
+                ng-show="$root.getPermissao() === 'ADMINISTRADOR'">
+                <i class="glyphicon glyphicon-edit"></i>
+            </a>
+        </td>
+    </tr>
+</table>
+<dir-pagination-controls boundary-links="true" on-page-change="pageChangeHandler(newPageNumber)" template-url="bower_components/angular-utils-pagination/dirPagination.tpl.html"></dir-pagination-controls>
+<!-- Modal -->
+<div class="modal fade" id="categoriaLayerModal" tabindex="-1" role="dialog" aria-labelledby="categoriaLayerModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="categoriaLayerModalLabel">Excluir categoria de layer?</h4>
+            </div>
+            <div class="modal-body">
+                Deseja excluir a categoria de layer [{{categoria.nome}}]?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="removerCategoriaLayer()">Excluir</button>
+            </div>
+        </div>
+    </div>
+</div>

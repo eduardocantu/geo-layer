@@ -1,0 +1,212 @@
+0 info it worked if it ends with ok
+1 verbose cli [ 'node', '/usr/local/bin/npm', 'install', 'karma', '--save-dev' ]
+2 info using npm@1.4.28
+3 info using node@v0.10.36
+4 verbose readDependencies using package.json deps
+5 verbose cache add [ 'karma', null ]
+6 verbose cache add name=undefined spec="karma" args=["karma",null]
+7 verbose parsed url { protocol: null,
+7 verbose parsed url   slashes: null,
+7 verbose parsed url   auth: null,
+7 verbose parsed url   host: null,
+7 verbose parsed url   port: null,
+7 verbose parsed url   hostname: null,
+7 verbose parsed url   hash: null,
+7 verbose parsed url   search: null,
+7 verbose parsed url   query: null,
+7 verbose parsed url   pathname: 'karma',
+7 verbose parsed url   path: 'karma',
+7 verbose parsed url   href: 'karma' }
+8 silly lockFile 512423cb-karma karma
+9 verbose lock karma /Users/akira/.npm/512423cb-karma.lock
+10 silly lockFile 512423cb-karma karma
+11 silly lockFile 512423cb-karma karma
+12 verbose addNamed [ 'karma', '' ]
+13 verbose addNamed [ null, '*' ]
+14 silly lockFile cd7961bb-karma karma@
+15 verbose lock karma@ /Users/akira/.npm/cd7961bb-karma.lock
+16 silly addNameRange { name: 'karma', range: '*', hasData: false }
+17 verbose request where is /karma
+18 verbose request registry https://registry.npmjs.org/
+19 verbose request id 11b1db74fe925e5f
+20 verbose url raw /karma
+21 verbose url resolving [ 'https://registry.npmjs.org/', './karma' ]
+22 verbose url resolved https://registry.npmjs.org/karma
+23 verbose request where is https://registry.npmjs.org/karma
+24 info trying registry request attempt 1 at 15:39:00
+25 verbose etag "7NPSSD8A5051PXIHNYQ3VYVN3"
+26 http GET https://registry.npmjs.org/karma
+27 http 200 https://registry.npmjs.org/karma
+28 silly registry.get cb [ 200,
+28 silly registry.get   { server: 'CouchDB/1.5.0 (Erlang OTP/R16B03)',
+28 silly registry.get     etag: '"BZJEQ9NBBO1ZXC5J4I0SE704S"',
+28 silly registry.get     'content-type': 'application/json',
+28 silly registry.get     'cache-control': 'max-age=60',
+28 silly registry.get     'content-length': '1024935',
+28 silly registry.get     'accept-ranges': 'bytes',
+28 silly registry.get     date: 'Sat, 03 Oct 2015 18:38:48 GMT',
+28 silly registry.get     via: '1.1 varnish',
+28 silly registry.get     age: '28',
+28 silly registry.get     connection: 'keep-alive',
+28 silly registry.get     'x-served-by': 'cache-iad2144-IAD',
+28 silly registry.get     'x-cache': 'HIT',
+28 silly registry.get     'x-cache-hits': '1',
+28 silly registry.get     'x-timer': 'S1443897528.767137,VS0,VE4',
+28 silly registry.get     vary: 'Accept' } ]
+29 silly addNameRange number 2 { name: 'karma', range: '*', hasData: true }
+30 silly addNameRange versions [ 'karma',
+30 silly addNameRange   [ '0.8.0',
+30 silly addNameRange     '0.9.0-dart',
+30 silly addNameRange     '0.8.1',
+30 silly addNameRange     '0.8.2',
+30 silly addNameRange     '0.8.3',
+30 silly addNameRange     '0.9.0',
+30 silly addNameRange     '0.8.4',
+30 silly addNameRange     '0.9.1',
+30 silly addNameRange     '0.8.5',
+30 silly addNameRange     '0.9.2',
+30 silly addNameRange     '0.9.2-dart',
+30 silly addNameRange     '0.9.3',
+30 silly addNameRange     '0.8.6',
+30 silly addNameRange     '0.9.4',
+30 silly addNameRange     '0.8.7',
+30 silly addNameRange     '0.9.5',
+30 silly addNameRange     '0.9.6',
+30 silly addNameRange     '0.8.8',
+30 silly addNameRange     '0.9.7',
+30 silly addNameRange     '0.9.8',
+30 silly addNameRange     '0.10.0',
+30 silly addNameRange     '0.10.1',
+30 silly addNameRange     '0.10.2',
+30 silly addNameRange     '0.11.0',
+30 silly addNameRange     '0.11.1',
+30 silly addNameRange     '0.10.3',
+30 silly addNameRange     '0.10.4',
+30 silly addNameRange     '0.11.2',
+30 silly addNameRange     '0.11.3',
+30 silly addNameRange     '0.10.5',
+30 silly addNameRange     '0.11.4',
+30 silly addNameRange     '0.11.5',
+30 silly addNameRange     '0.10.6',
+30 silly addNameRange     '0.11.6',
+30 silly addNameRange     '0.10.7',
+30 silly addNameRange     '0.11.7',
+30 silly addNameRange     '0.11.8',
+30 silly addNameRange     '0.11.9',
+30 silly addNameRange     '0.10.8',
+30 silly addNameRange     '0.11.10',
+30 silly addNameRange     '0.11.11',
+30 silly addNameRange     '0.11.12',
+30 silly addNameRange     '0.11.11-dev',
+30 silly addNameRange     '0.10.9',
+30 silly addNameRange     '0.11.12-dev',
+30 silly addNameRange     '0.11.12-dev2',
+30 silly addNameRange     '0.11.13',
+30 silly addNameRange     '0.11.14',
+30 silly addNameRange     '0.12.0',
+30 silly addNameRange     '0.10.10',
+30 silly addNameRange     '0.12.1',
+30 silly addNameRange     '0.12.2',
+30 silly addNameRange     '0.12.3',
+30 silly addNameRange     '0.12.4',
+30 silly addNameRange     '0.12.5',
+30 silly addNameRange     '0.12.6',
+30 silly addNameRange     '0.12.6-beta-43e6e28',
+30 silly addNameRange     '0.12.7',
+30 silly addNameRange     '0.12.8',
+30 silly addNameRange     '0.12.9',
+30 silly addNameRange     '0.12.10',
+30 silly addNameRange     '0.12.11',
+30 silly addNameRange     '0.12.12',
+30 silly addNameRange     '0.12.11-beta-3029418',
+30 silly addNameRange     '0.12.13',
+30 silly addNameRange     '0.12.14',
+30 silly addNameRange     '0.12.15',
+30 silly addNameRange     '0.12.16',
+30 silly addNameRange     '0.12.16-beta-905422d',
+30 silly addNameRange     '0.12.17',
+30 silly addNameRange     '0.12.18',
+30 silly addNameRange     '0.12.19',
+30 silly addNameRange     '0.12.20',
+30 silly addNameRange     '0.12.21',
+30 silly addNameRange     '0.12.22',
+30 silly addNameRange     '0.12.23',
+30 silly addNameRange     '0.12.24',
+30 silly addNameRange     '0.12.24-beta-6cf7955',
+30 silly addNameRange     '0.12.25',
+30 silly addNameRange     '0.12.25-beta-37a7958',
+30 silly addNameRange     '0.12.25-beta-ad5bc24',
+30 silly addNameRange     '0.12.26',
+30 silly addNameRange     '0.12.27',
+30 silly addNameRange     '0.12.28',
+30 silly addNameRange     '0.12.28-beta-b9be580',
+30 silly addNameRange     '0.12.29',
+30 silly addNameRange     '0.12.30',
+30 silly addNameRange     '0.12.31',
+30 silly addNameRange     '0.12.28-beta-f65c864',
+30 silly addNameRange     '0.12.24-dev-test',
+30 silly addNameRange     '0.12.24-dev-socketio10',
+30 silly addNameRange     '0.12.24-dev-socketio10-2',
+30 silly addNameRange     '0.12.32-beta.0',
+30 silly addNameRange     '0.12.32',
+30 silly addNameRange     '0.13.0-rc.0',
+30 silly addNameRange     '0.12.33',
+30 silly addNameRange     '0.13.0-rc.1',
+30 silly addNameRange     '0.12.34',
+30 silly addNameRange     '0.13.0-rc.2',
+30 silly addNameRange     '0.12.35',
+30 silly addNameRange     '0.13.0-rc.3',
+30 silly addNameRange     '0.12.36',
+30 silly addNameRange     '0.13.0-rc.4',
+30 silly addNameRange     '0.12.37',
+30 silly addNameRange     '0.13.0-rc.5',
+30 silly addNameRange     '0.13.0-rc.6',
+30 silly addNameRange     '0.13.0-rc.7',
+30 silly addNameRange     '0.13.0-rc.8',
+30 silly addNameRange     '0.13.0-rc.9',
+30 silly addNameRange     '0.13.0',
+30 silly addNameRange     '0.13.1',
+30 silly addNameRange     '0.13.2',
+30 silly addNameRange     '0.13.3',
+30 silly addNameRange     '0.13.4',
+30 silly addNameRange     '0.13.5',
+30 silly addNameRange     '0.13.6',
+30 silly addNameRange     '0.13.7',
+30 silly addNameRange     '0.13.8',
+30 silly addNameRange     '0.13.9',
+30 silly addNameRange     '0.13.10' ] ]
+31 verbose addNamed [ 'karma', '0.13.10' ]
+32 verbose addNamed [ '0.13.10', '0.13.10' ]
+33 silly lockFile f71886d1-karma-0-13-10 karma@0.13.10
+34 verbose lock karma@0.13.10 /Users/akira/.npm/f71886d1-karma-0-13-10.lock
+35 silly lockFile db185afa-pmjs-org-karma-karma-0-13-10-tgz https://registry.npmjs.org/karma/-/karma-0.13.10.tgz
+36 verbose lock https://registry.npmjs.org/karma/-/karma-0.13.10.tgz /Users/akira/.npm/db185afa-pmjs-org-karma-karma-0-13-10-tgz.lock
+37 verbose addRemoteTarball [ 'https://registry.npmjs.org/karma/-/karma-0.13.10.tgz',
+37 verbose addRemoteTarball   '4ef4e3cca506a5f2bfb5448f723e6d3cba8db1c5' ]
+38 info retry fetch attempt 1 at 15:39:03
+39 verbose fetch to= /var/folders/3t/0gq1l6kn5k9d3rgl4fn1pmd40000gn/T/npm-15992-aUN8TRee/registry.npmjs.org/karma/-/karma-0.13.10.tgz
+40 http GET https://registry.npmjs.org/karma/-/karma-0.13.10.tgz
+41 http 200 https://registry.npmjs.org/karma/-/karma-0.13.10.tgz
+42 silly lockFile db185afa-pmjs-org-karma-karma-0-13-10-tgz https://registry.npmjs.org/karma/-/karma-0.13.10.tgz
+43 silly lockFile db185afa-pmjs-org-karma-karma-0-13-10-tgz https://registry.npmjs.org/karma/-/karma-0.13.10.tgz
+44 silly lockFile f71886d1-karma-0-13-10 karma@0.13.10
+45 silly lockFile f71886d1-karma-0-13-10 karma@0.13.10
+46 silly lockFile cd7961bb-karma karma@
+47 silly lockFile cd7961bb-karma karma@
+48 error Error: EACCES, mkdir '/Users/akira/.npm/karma/0.13.10'
+48 error  { [Error: EACCES, mkdir '/Users/akira/.npm/karma/0.13.10']
+48 error   errno: 3,
+48 error   code: 'EACCES',
+48 error   path: '/Users/akira/.npm/karma/0.13.10',
+48 error   parent: 'geolayer' }
+49 error Please try running this command again as root/Administrator.
+50 error System Darwin 14.5.0
+51 error command "node" "/usr/local/bin/npm" "install" "karma" "--save-dev"
+52 error cwd /Users/akira/GitHub/geo-layer
+53 error node -v v0.10.36
+54 error npm -v 1.4.28
+55 error path /Users/akira/.npm/karma/0.13.10
+56 error code EACCES
+57 error errno 3
+58 error stack Error: EACCES, mkdir '/Users/akira/.npm/karma/0.13.10'
+59 verbose exit [ 3, true ]

@@ -1,0 +1,67 @@
+<script>
+    // Tiled layer
+    var osmLayer = new ol.layer.Tile({
+        source: new ol.source.OSM()
+    });
+
+    // Source retrieving WFS data in GML format using AJAX
+    var vectorSource = new ol.source.ServerVector({
+        format: new ol.format.WFS({
+            featureNS: 'http://openstreemap.org',
+            featureType: 'water_areas'
+        }),
+        loader: function (extent, resolution, projection) {
+            var url = 'http://demo.opengeo.org/geoserver/wfs?' +
+                    'service=WFS&request=GetFeature&' +
+                    'version=1.1.0&typename=osm:water_areas&' +
+                    'srsname=EPSG:3857&' +
+                    'bbox=' + extent.join(',');
+            $.ajax({
+                url: url
+            })
+                    .done(function (response) {
+                        vectorSource.addFeatures(vectorSource.readFeatures(response));
+                    });
+        },
+        strategy: ol.loadingstrategy.createTile(new ol.tilegrid.XYZ({
+            maxZoom: 19
+        })),
+        projection: 'EPSG:3857'
+    });
+
+    var wmsSource = new ol.source.TileWMS({
+        url: 'http://www.connectgeo.com.br:8088/geoserver/wms',
+        params: {
+            'LAYERS': 'tasmania',
+            'TRANSPARENT': 'true'
+        }
+    });
+    var wmsLayer = new ol.layer.Tile({
+        source: wmsSource
+    });
+
+    var view = new ol.View({
+        center: [0, 0],
+        zoom: 1
+    });
+    // Map
+    var map = new ol.Map({
+        target: 'map',
+        renderer: 'canvas',
+        layers: [osmLayer,
+            wmsLayer
+        ],
+        view: view
+    });
+
+    map.on('singleclick', function (evt) {
+        var viewResolution = /** @type {number} */ (view.getResolution());
+        var url = wmsSource.getGetFeatureInfoUrl(
+                evt.coordinate, viewResolution, 'EPSG:3857',
+                {'INFO_FORMAT': 'application/json'});
+        console.log(url);
+    });
+
+</script>
+
+<div id="map"></div>
