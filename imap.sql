@@ -31,7 +31,9 @@ insert INTO usuario (nome, email, documento, tipo, municipio, senha) VALUES ('En
 insert INTO grupo (nome, descricao) values ('Saneamento', 'Saneamento basico');
 insert INTO categoria_layer (nome) values ('categoria 1');
 
-insert INTO layer(nome, descricao, codigo_grupo , formato, cor, tipo, codigo_categoria_layer) values ('layer 1'insert INTO ponto(descricao, coordenada, status, codigo_layer, data) values ('ponto 110', '-5414390.869240167,-3188897.6021485897','APROVADO',1, date '2015-10-01' + interval '1 hour');
+insert INTO layer(nome, descricao, codigo_grupo , formato, cor, tipo, codigo_categoria_layer) values ('layer 1', 'Layer 1', (select codigo from grupo where nome='Saneamento'), 'Formato 1', 'Azul', 'OCORRENCIA', (select codigo from categoria_layer where nome='categoria 1'));
+
+insert INTO ponto(descricao, coordenada, status, codigo_layer, data) values ('ponto 110', '-5414390.869240167,-3188897.6021485897','APROVADO',1, date '2015-10-01' + interval '1 hour');
 insert INTO ponto(descricao, coordenada, status, codigo_layer, data) values ('ponto 101', '-5415308.113579589,-3189470.8798607285','APROVADO',1, date '2015-10-01' + interval '1 hour');
 insert INTO ponto(descricao, coordenada, status, codigo_layer, data) values ('ponto 102', '-5415804.954263443,-3189203.35026173','APROVADO',1, date '2015-09-29' + interval '1 hour');
 insert INTO ponto(descricao, coordenada, status, codigo_layer, data) values ('ponto 103', '-5414505.524782594,-3189967.7205445822','APROVADO',1, date '2015-09-29' + interval '1 hour');

@@ -1,5 +1,5 @@
 var config = {};
-config.postgres = "postgres://redoclixipobto:2d6c31c8800ca981c7a6749ec43157ab9e96dd0f87ddcfb3d5c8b54498ae8d70@ec2-54-235-88-58.compute-1.amazonaws.com:5432/dfo261kie2ebf5";
+config.postgres = "postgres://edjgpnuj:vFfgknHUiybcPexq3Uu7PnVwhXEowdri@elmer.db.elephantsql.com:5432/edjgpnuj";
 config.port = 3000;
 config.session = {};
 config.session.pass = 'imap';
